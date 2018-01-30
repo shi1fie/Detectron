@@ -82,6 +82,13 @@ def parse_args():
         type=str
     )
     parser.add_argument(
+        '--output-ext',
+        dest='output_ext',
+        help='output file name extension (default: pdf)',
+        default='pdf',
+        type=str
+    )
+    parser.add_argument(
         'im_or_folder', help='image or folder of images', default=None
     )
     if len(sys.argv) == 1:
@@ -106,7 +113,7 @@ def main(args):
 
     for i, im_name in enumerate(im_list):
         out_name = os.path.join(
-            args.output_dir, '{}'.format(os.path.basename(im_name) + '.pdf')
+            args.output_dir, '{}'.format(os.path.basename(im_name) + args.output_ext)
         )
         logger.info('Processing {} -> {}'.format(im_name, out_name))
         im = cv2.imread(im_name)
